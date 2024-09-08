@@ -15,7 +15,7 @@ export default function Home() {
           </span>
         </h2>
 
-        <p className="text-gray-400 max-w-2xl mb-12 text-lg">
+        <p className="text-gray-400 max-w-4xl mb-12 text-lg">
           I am a recent UNSW graduate and a lover of learning and technology.
           I&apos;ve studied and worked across diverse fields ranging from AI to
           Cybersecurity. Beyond tech, I&apos;m into perfecting my craft through
@@ -28,15 +28,20 @@ export default function Home() {
           <h3 className="text-white text-xl mb-6 font-light">
             selected projects
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
+          <div className="grid grid-cols-1 gap-16 lg:gap-x-36 lg:gap-y-16 lg:grid-cols-2">
             <ProjectCard
-              title="Project 1"
-              image=""
+              title="OpenOnion"
+              image="/openonionlogo1.svg"
               tags={["React", "TailwindCSS", "NextJS"]}
             />
             <ProjectCard
-              title="Project 2"
-              image=""
+              title="EventStar"
+              image="/eventstarlogo.svg"
+              tags={["React", "TailwindCSS", "NextJS"]}
+            />
+            <ProjectCard
+              title="Geobuddies"
+              image="/geobuddieslogo.svg"
               tags={["React", "TailwindCSS", "NextJS"]}
             />
           </div>
