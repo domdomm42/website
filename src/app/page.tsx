@@ -2,7 +2,7 @@ import ProjectCard from "../components/ProjectCard";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#191a19] p-8 sm:p-6 md:p-8 lg:p-12 xl:p-36">
+    <div className="flex flex-col min-h-screen bg-[#191a19] p-8 sm:p-6 md:p-8 lg:p-12 xl:px-48 xl:py-24">
       {/* <header className="mb-12">
         <h1 className="text-2xl text-white">Oudom Lim</h1>
       </header> */}
@@ -31,18 +31,24 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-16 lg:gap-x-36 lg:gap-y-16 lg:grid-cols-2">
             <ProjectCard
               title="OpenOnion"
-              image="/openonionlogo1.svg"
-              tags={["React", "TailwindCSS", "NextJS"]}
+              image="/openonionlogo.svg"
+              tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+              description="Helping students navigate university life"
+              link="https://pls.openonion.ai"
             />
             <ProjectCard
               title="EventStar"
               image="/eventstarlogo.svg"
-              tags={["React", "TailwindCSS", "NextJS"]}
+              tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+              description="Simplifying event management and ticketing"
+              link="https://eventstar.netlify.app"
             />
             <ProjectCard
               title="Geobuddies"
               image="/geobuddieslogo.svg"
-              tags={["React", "TailwindCSS", "NextJS"]}
+              tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+              description="Free-to-play Geoguessr clone"
+              link="https://geobuddies.netlify.app"
             />
           </div>
         </section>
