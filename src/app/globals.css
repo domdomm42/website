@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --cursor-x: 0px;
+  --cursor-y: 0px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,24 +20,38 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-spectral), serif;
+  cursor: none;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #3b82f6;
+  border-radius: 50%;
+  position: fixed;
+  left: var(--cursor-x);
+  top: var(--cursor-y);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.custom-cursor.hovering {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+a,
+button,
+[role="button"] {
+  cursor: none;
+}
+
+::selection {
+  background-color: rgba(255, 255, 255);
+  color: black;
 }
 
 .gradient-text {
@@ -49,47 +65,14 @@ body {
   text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
-.project-card {
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: scale(1.05);
-}
-
-.card-border {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(to right, transparent, transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  transition: all 0.3s ease;
-}
-
-.project-card:hover .card-border {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
-  opacity: 0.5;
-}
-
-.card-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgba(59, 130, 246, 0.3) 0%,
-    rgba(17, 24, 39, 0) 70%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.project-card:hover .card-glow {
-  opacity: 1;
-}
-
-.project-card:hover img {
-  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

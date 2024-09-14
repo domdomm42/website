@@ -17,7 +17,8 @@ export default function Home() {
           <h2 className="text-5xl text-white mb-8">
             welcome to
             <span className="block">
-              my part of <span className="gradient-text">the web</span>
+              my part of{" "}
+              <span className="gradient-text select-none">the web</span>
             </span>
           </h2>
 

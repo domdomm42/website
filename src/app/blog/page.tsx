@@ -27,7 +27,9 @@ export default function BlogPage() {
           <FadeIn key={post.slug}>
             <article className="border-b border-gray-800 pb-8">
               <Link href={`/blog/${post.slug}`} className="block">
-                <h2 className="text-2xl text-white mb-2 hover:text-gray-300 transition-colors">{post.title}</h2>
+                <h2 className="text-2xl text-white mb-2 hover:text-gray-300 transition-colors">
+                  {post.title}
+                </h2>
                 <p className="text-gray-400 mb-3 text-sm">{post.date}</p>
                 <p className="text-gray-300">{post.excerpt}</p>
               </Link>
