@@ -2,6 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import switchOn from "../../public/switch-on.mp3";
+import useSound from "use-sound";
 
 interface ProjectCardProps {
   title: string;
@@ -19,8 +21,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   link,
 }) => {
+  const soundUrl = switchOn;
+  const [play] = useSound(soundUrl);
   return (
-    <Link href={link} target="_blank" className="block group">
+    <Link
+      href={link}
+      target="_blank"
+      className="block group"
+      data-cursor-hover
+      onMouseEnter={() => play()}
+    >
       <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl">
         <div className="relative h-48">
           <Image

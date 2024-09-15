@@ -24,9 +24,9 @@ body {
 }
 
 .custom-cursor {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #3b82f6;
+  width: 15px;
+  height: 15px;
+  background-color: #3b82f6;
   border-radius: 50%;
   position: fixed;
   left: var(--cursor-x);
@@ -35,12 +35,43 @@ body {
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition: width 0.2s, height 0.2s, background-color 0.2s;
+  opacity: 0;
+}
+
+.custom-cursor.visible {
+  opacity: 1;
+}
+
+.custom-cursor.trailing {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(59, 130, 246, 0.3);
+  transition: all 0.1s ease-out;
 }
 
 .custom-cursor.hovering {
+  width: 10px;
+  height: 10px;
+}
+
+.custom-cursor.trailing.hovering {
   width: 40px;
   height: 40px;
   background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* New styles for click effect */
+.custom-cursor.clicking {
+  width: 10px;
+  height: 10px;
+  transition: all 0.1s ease;
+}
+
+.custom-cursor.trailing.clicking {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(59, 130, 246, 0.1);
+  transition: all 0.1s ease;
 }
 
 a,
