@@ -9,7 +9,7 @@ export default function Home() {
   const latestPost = getPostsData()[0]; // Get the latest blog post
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-16 2xl:px-32 2xl:py-24">
+    <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
       <FadeIn>
         <Header />
       </FadeIn>
@@ -18,8 +18,10 @@ export default function Home() {
           <h2 className="text-5xl text-white mb-8">
             welcome to
             <span className="block">
-              my part of{" "}
-              <span className="gradient-text select-none">the web</span>
+              my{"  "}
+              <span className="gradient-text select-none">
+                digital workshop
+              </span>
             </span>
           </h2>
 

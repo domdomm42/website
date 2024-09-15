@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Logo() {
   return (
     <svg
@@ -7,20 +9,54 @@ export default function Logo() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="40" height="40" rx="8" fill="#1E1E1E" />
+      <rect width="40" height="40" rx="4" fill="#1E1E1E" />
+      {/* O with hole */}
       <path
-        d="M12 28L20 12L28 28"
-        stroke="#FFFFFF"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10 10V30H20V10H10ZM14 14V26H16V14H14Z"
+        fill="white"
       />
+      {/* L */}
+      <path d="M24 10V30H34V26H28V10H24Z" fill="white" />
+      {/* Gradient overlay for O */}
       <path
-        d="M15 22H25"
-        stroke="#6B8AFF"
-        strokeWidth="2"
-        strokeLinecap="round"
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10 10V30H20V10H10ZM14 14V26H16V14H14Z"
+        fill="url(#paint0_linear)"
+        fillOpacity="0.5"
       />
+      {/* Gradient overlay for L */}
+      <path
+        d="M24 10V30H34V26H28V10H24Z"
+        fill="url(#paint1_linear)"
+        fillOpacity="0.5"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear"
+          x1="15"
+          y1="10"
+          x2="15"
+          y2="30"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#60A5FA" />
+          <stop offset="1" stopColor="#60A5FA" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient
+          id="paint1_linear"
+          x1="29"
+          y1="10"
+          x2="29"
+          y2="30"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#60A5FA" />
+          <stop offset="1" stopColor="#60A5FA" stopOpacity="0" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 }

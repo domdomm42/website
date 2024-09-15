@@ -10,8 +10,8 @@ const spectral = Spectral({
 });
 
 export const metadata: Metadata = {
-  title: "Your Portfolio",
-  description: "Your portfolio description",
+  title: "Oudom's site",
+  description: "Oudom portfolio website",
 };
 
 export default function RootLayout({
