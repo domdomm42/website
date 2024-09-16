@@ -1,7 +1,8 @@
 import { getPostData, getPostsData } from "../../../lib/blog";
 import { FadeIn } from "../../../components/FadeIn";
-import Link from "next/link";
 import { notFound } from "next/navigation";
+import Logo from "@/components/Logo";
+// import Link from "next/link";
 
 export async function generateStaticParams() {
   const posts = getPostsData();
@@ -22,13 +23,16 @@ export default async function BlogPost({
   }
 
   return (
-    <div className="min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-16 2xl:px-32 2xl:py-24">
+    <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
       <FadeIn>
-        <Link
-          href="/blog"
-          className="text-gray-400 hover:text-white transition-colors duration-200 mb-8 inline-block"
-        >
-          <span className="flex items-center">
+        <header className="flex items-center mb-8 space-x-4">
+          <div className="relative inline-block">
+            <Logo />
+          </div>
+          {/* <Link
+            href="/blog"
+            className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center mt-28"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5 mr-2"
@@ -42,8 +46,8 @@ export default async function BlogPost({
               />
             </svg>
             Back to Blog
-          </span>
-        </Link>
+          </Link> */}
+        </header>
 
         <article className="mt-8 max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold text-white mb-4">

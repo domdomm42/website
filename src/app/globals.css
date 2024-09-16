@@ -60,7 +60,6 @@ body {
   background-color: rgba(59, 130, 246, 0.2);
 }
 
-/* New styles for click effect */
 .custom-cursor.clicking {
   width: 10px;
   height: 10px;

@@ -6,7 +6,7 @@ import { FadeIn } from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 
 export default function Home() {
-  const latestPost = getPostsData()[0]; // Get the latest blog post
+  const latestPost = getPostsData()[0];
 
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
@@ -15,10 +15,7 @@ export default function Home() {
       </FadeIn>
       <main className="flex-grow">
         <FadeIn delay={200}>
-          <h2
-            className="text-5xl text-white mb-8"
-            style={{ fontFamily: "Boston Angel" }}
-          >
+          <h2 className="text-5xl text-white mb-8">
             welcome to my{"  "}
             <span className="gradient-text select-none">digital workshop</span>
           </h2>

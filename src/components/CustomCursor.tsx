@@ -19,11 +19,12 @@ const CustomCursor: React.FC = () => {
       cursor.style.setProperty("--cursor-x", x);
       cursor.style.setProperty("--cursor-y", y);
 
-      // Add a slight delay for the trailing cursor
-      setTimeout(() => {
+      // Use requestAnimationFrame for the trailing cursor
+      requestAnimationFrame(() => {
         trailingCursor.style.setProperty("--cursor-x", x);
         trailingCursor.style.setProperty("--cursor-y", y);
-      }, 100);
+      });
+
       if (!isVisible) {
         setIsVisible(true);
       }
