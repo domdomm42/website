@@ -6,8 +6,24 @@ const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const trailingCursorRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    const checkTouchCapability = () => {
+      setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+
+    checkTouchCapability();
+    window.addEventListener('resize', checkTouchCapability);
+
+    return () => {
+      window.removeEventListener('resize', checkTouchCapability);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isTouchDevice) return;
+
     const cursor = cursorRef.current;
     const trailingCursor = trailingCursorRef.current;
 
@@ -62,7 +78,9 @@ const CustomCursor: React.FC = () => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isVisible]);
+  }, [isTouchDevice]);
+
+  if (isTouchDevice) return null;
 
   return (
     <>
