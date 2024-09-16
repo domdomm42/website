@@ -49,11 +49,11 @@ export default async function BlogPost({
           </Link> */}
         </header>
 
-        <article className="mt-8 max-w-3xl mx-auto">
+        <article className="mt-8 max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-white mb-4">
             {postData.title}
           </h1>
-          <p className="text-gray-400 mb-8">{postData.date}</p>
+          <p className="text-gray-400 mb-8">-posted {postData.date}</p>
           <div
             className="prose prose-invert prose-lg"
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}

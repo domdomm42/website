@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import switchOn from "../../public/switch-on.mp3";
+import bubbleSound from "../../public/bubble.mp3";
 import useSound from "use-sound";
 
 interface ProjectCardProps {
@@ -23,6 +24,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   const soundUrl = switchOn;
   const [play] = useSound(soundUrl);
+
+  const [bubble] = useSound(bubbleSound);
   return (
     <Link
       href={link}
@@ -49,7 +52,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-[#2a2a2a] text-gray-300 text-xs rounded-full"
+                className="px-2 py-1 bg-[#2a2a2a] text-gray-300 text-xs rounded-full hover:bg-white hover:text-black"
+                onMouseEnter={() => bubble()}
               >
                 {tag}
               </span>

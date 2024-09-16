@@ -1,9 +1,9 @@
 import Header from "@/components/Header";
 import ProjectCard from "../components/ProjectCard";
-import Link from "next/link";
 import { getPostsData } from "../lib/blog";
 import { FadeIn } from "@/components/FadeIn";
 import Footer from "@/components/Footer";
+import LatestBlogCard from "@/components/LatestBlogCard";
 
 export default function Home() {
   const latestPost = getPostsData()[0];
@@ -41,21 +41,42 @@ export default function Home() {
               <ProjectCard
                 title="OpenOnion"
                 image="/ProductSample2.webp"
-                tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+                tags={[
+                  "Full-Stack",
+                  "React",
+                  "TailwindCSS",
+                  "NextJS",
+                  "MongoDB",
+                ]}
                 description="Helping students navigate university life"
                 link="https://pls.openonion.ai"
               />
               <ProjectCard
                 title="EventStar"
                 image="/eventstar1.png"
-                tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+                tags={[
+                  "Full-Stack",
+                  "Python",
+                  "React",
+                  "TailwindCSS",
+                  "FastAPI",
+                  "Vite",
+                  "PostgreSQL",
+                ]}
                 description="Simplifying event management and ticketing"
                 link="https://eventstar.netlify.app"
               />
               <ProjectCard
                 title="Geobuddies"
                 image="/geoBuddies.png"
-                tags={["Full-Stack", "React", "TailwindCSS", "NextJS"]}
+                tags={[
+                  "Full-Stack",
+                  "NodeJS",
+                  "React",
+                  "TailwindCSS",
+                  "Vite",
+                  "MongoDB",
+                ]}
                 description="Free-to-play Geoguessr clone"
                 link="https://geobuddies.netlify.app"
               />
@@ -101,18 +122,7 @@ export default function Home() {
             <h3 className="text-white text-xl mb-6 font-light">
               📝 check out my latest blog
             </h3>
-            <div className="bg-[#1E1F1E] p-6 rounded-lg shadow-lg">
-              <Link href={`/blog/${latestPost.slug}`} className="block">
-                <h4 className="text-2xl text-white mb-2 hover:text-gray-300 transition-colors">
-                  {latestPost.title}
-                </h4>
-                <p className="text-gray-400 mb-3 text-sm">{latestPost.date}</p>
-                <p className="text-gray-300 mb-4">{latestPost.excerpt}</p>
-                <span className="text-blue-400 hover:text-blue-300 transition-colors">
-                  Read more →
-                </span>
-              </Link>
-            </div>
+            <LatestBlogCard post={latestPost} />
           </section>
         </FadeIn>
       </main>

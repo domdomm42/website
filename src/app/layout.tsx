@@ -13,6 +13,11 @@ const spectral = Spectral({
 export const metadata: Metadata = {
   title: "Oudom's site",
   description: "Oudom portfolio website",
+  icons: {
+    icon: "/drill.svg",
+    apple: "/drill.svg",
+    shortcut: "/drill.svg",
+  },
 };
 
 export default function RootLayout({
