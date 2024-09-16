@@ -140,3 +140,9 @@ button,
   border-radius: 50%;
   animation: spark 0.5s ease-out infinite;
 }
+
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
