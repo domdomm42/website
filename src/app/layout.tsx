@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Spectral } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "../components/CustomCursor";
+import './fonts.css';
 
 const spectral = Spectral({
   subsets: ["latin"],

@@ -15,14 +15,12 @@ export default function Home() {
       </FadeIn>
       <main className="flex-grow">
         <FadeIn delay={200}>
-          <h2 className="text-5xl text-white mb-8">
-            welcome to
-            <span className="block">
-              my{"  "}
-              <span className="gradient-text select-none">
-                digital workshop
-              </span>
-            </span>
+          <h2
+            className="text-5xl text-white mb-8"
+            style={{ fontFamily: "Boston Angel" }}
+          >
+            welcome to my{"  "}
+            <span className="gradient-text select-none">digital workshop</span>
           </h2>
 
           <p className="text-gray-400 max-w-4xl mb-40 text-lg">
