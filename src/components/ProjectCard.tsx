@@ -23,9 +23,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   link,
 }) => {
   const soundUrl = switchOn;
-  const [play] = useSound(soundUrl);
+  const [play] = useSound(soundUrl, { volume: 0.3 });
 
-  const [bubble] = useSound(bubbleSound);
+  const [bubble] = useSound(bubbleSound, { volume: 0.7 });
   return (
     <Link
       href={link}

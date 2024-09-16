@@ -17,6 +17,7 @@ export default function Header() {
               className="text-gray-400 hover:text-white transition-colors duration-200"
               onMouseEnter={() => {
                 const audio = new Audio(switchOn);
+                audio.volume = 0.3;
                 audio.play();
               }}
             >

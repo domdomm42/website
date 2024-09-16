@@ -53,9 +53,9 @@ export default async function BlogPost({
           <h1 className="text-4xl font-bold text-white mb-4">
             {postData.title}
           </h1>
-          <p className="text-gray-400 mb-8">-posted {postData.date}</p>
+          <p className="text-gray-400 mb-8">- posted {postData.date}</p>
           <div
-            className="prose prose-invert prose-lg"
+            className="prose prose-invert prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
           />
         </article>

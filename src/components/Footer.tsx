@@ -11,6 +11,7 @@ export default function Footer() {
   const playSound = () => {
     if (audio) {
       audio.currentTime = 0;
+      audio.volume = 0.3;
       audio.play();
     }
   };
