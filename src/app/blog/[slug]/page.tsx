@@ -2,6 +2,7 @@ import { getPostData, getPostsData } from "../../../lib/blog";
 import { FadeIn } from "../../../components/FadeIn";
 import { notFound } from "next/navigation";
 import Logo from "@/components/Logo";
+import Footer from "@/components/Footer";
 // import Link from "next/link";
 
 export async function generateStaticParams() {
@@ -60,6 +61,7 @@ export default async function BlogPost({
           />
         </article>
       </FadeIn>
+      <Footer />
     </div>
   );
 }
