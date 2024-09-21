@@ -31,12 +31,12 @@ export default function Home() {
         </FadeIn>
 
         <section className="mb-40">
-          <FadeIn delay={400}>
+          <FadeIn delay={200} mobileDelay={100}>
             <h3 className="text-white text-xl mb-6 font-light">
               selected works
             </h3>
           </FadeIn>
-          <FadeIn delay={600}>
+          <FadeIn delay={400} mobileDelay={200}>
             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 xl:grid-cols-3">
               <ProjectCard
                 title="OpenOnion"

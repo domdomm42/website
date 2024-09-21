@@ -1,39 +1,26 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
-import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import React from 'react';
+import { useInView } from '@/hooks/useInView';
 
 interface FadeInProps {
   children: React.ReactNode;
-  className?: string;
   delay?: number;
-  duration?: number;
+  mobileDelay?: number;
 }
 
-export const FadeIn: React.FC<FadeInProps> = ({
-  children,
-  className = "",
-  delay = 0,
-  duration = 1000,
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isIntersecting = useIntersectionObserver(ref, { threshold: 0.1 });
-  const [hasAnimated, setHasAnimated] = useState(false);
+export const FadeIn: React.FC<FadeInProps> = ({ children, delay = 0, mobileDelay }) => {
+  const { ref, isInView } = useInView();
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
-  useEffect(() => {
-    if (isIntersecting && !hasAnimated) {
-      setHasAnimated(true);
-    }
-  }, [isIntersecting, hasAnimated]);
+  const actualDelay = isMobile && mobileDelay !== undefined ? mobileDelay : delay;
 
   return (
     <div
       ref={ref}
-      className={`transition-opacity ${className}`}
-      style={{
-        opacity: hasAnimated ? 1 : 0,
-        transitionDuration: `${duration}ms`,
-        transitionDelay: `${delay}ms`,
-      }}
+      className={`transition-opacity duration-1000 ${
+        isInView ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{ transitionDelay: `${actualDelay}ms` }}
     >
       {children}
     </div>
