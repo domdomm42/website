@@ -1,16 +1,15 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { remark } from "remark";
-import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
 export function getPostsData() {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames
+    .filter((fileName) => fileName.endsWith(".mdx"))
     .map((fileName) => {
-      const slug = fileName.replace(/\.md$/, "");
+      const slug = fileName.replace(/\.mdx$/, "");
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
       const matterResult = matter(fileContents);
@@ -28,18 +27,13 @@ export function getPostsData() {
 }
 
 export async function getPostData(slug: string) {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fullPath = path.join(postsDirectory, `${slug}.mdx`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const matterResult = matter(fileContents);
 
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
-
   return {
     slug,
-    contentHtml,
+    content: matterResult.content,
     ...(matterResult.data as { title: string; date: string; excerpt: string }),
   };
 }

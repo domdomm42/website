@@ -3,7 +3,7 @@ import { FadeIn } from "../../../components/FadeIn";
 import { notFound } from "next/navigation";
 import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
-// import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
 export async function generateStaticParams() {
   const posts = getPostsData();
@@ -30,24 +30,6 @@ export default async function BlogPost({
           <div className="relative inline-block">
             <Logo />
           </div>
-          {/* <Link
-            href="/blog"
-            className="text-gray-400 hover:text-white transition-colors duration-200 flex items-center mt-28"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-            Back to Blog
-          </Link> */}
         </header>
 
         <article className="mt-8 max-w-7xl mx-auto">
@@ -55,10 +37,9 @@ export default async function BlogPost({
             {postData.title}
           </h1>
           <p className="text-gray-400 mb-8">- posted {postData.date}</p>
-          <div
-            className="prose prose-invert prose-lg max-w-none"
-            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-          />
+          <div className="prose prose-invert prose-lg max-w-none">
+            <MDXRemote source={postData.content} />
+          </div>
         </article>
       </FadeIn>
       <Footer />
