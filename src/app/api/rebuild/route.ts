@@ -29,7 +29,7 @@ export async function GET() {
           page_id: page.id,
           properties: {
             "Multi-select": {
-              multi_select: [{ name: "Published" }],
+              multi_select: [{ name: "Published", color: "blue" }],
             },
           },
         });
