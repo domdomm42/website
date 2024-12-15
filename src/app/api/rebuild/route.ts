@@ -6,15 +6,23 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // GET TOKEN FROM URL
+    const { searchParams } = new URL(request.url);
+    const token = searchParams.get("token");
+
+    if (token !== process.env.REVALIDATE_TOKEN) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     // Check for "Done" pages
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
-        property: "Multi-select",
-        multi_select: {
-          contains: "Done",
+        property: "Status",
+        status: {
+          equals: "Done",
         },
       },
     });
@@ -28,8 +36,11 @@ export async function GET() {
         await notion.pages.update({
           page_id: page.id,
           properties: {
-            "Multi-select": {
-              multi_select: [{ name: "Published", color: "blue" }],
+            Status: {
+              status: {
+                name: "Published",
+                color: "blue",
+              },
             },
           },
         });
