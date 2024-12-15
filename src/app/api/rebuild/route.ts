@@ -21,7 +21,7 @@ export async function GET(request: Request) {
       database_id: process.env.NOTION_DATABASE_ID!,
       filter: {
         property: "Status",
-        status: {
+        select: {
           equals: "Done",
         },
       },
@@ -37,7 +37,7 @@ export async function GET(request: Request) {
           page_id: page.id,
           properties: {
             Status: {
-              status: {
+              select: {
                 name: "Published",
               },
             },
