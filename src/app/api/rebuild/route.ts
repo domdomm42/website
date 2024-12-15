@@ -39,7 +39,6 @@ export async function GET(request: Request) {
             Status: {
               status: {
                 name: "Published",
-                color: "blue",
               },
             },
           },
