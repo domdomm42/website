@@ -1,12 +1,13 @@
 import Header from "@/components/Header";
 import ProjectCard from "../components/ProjectCard";
-import { getPostsData } from "../lib/blog";
+import { getPostsData } from "../lib/notion";
 import { FadeIn } from "@/components/FadeIn";
 import Footer from "@/components/Footer";
 import LatestBlogCard from "@/components/LatestBlogCard";
 
-export default function Home() {
-  const latestPost = getPostsData()[0];
+export default async function Home() {
+  const posts = await getPostsData();
+  const latestPost = posts[0];
 
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">

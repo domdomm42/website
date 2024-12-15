@@ -1,4 +1,4 @@
-import { getPostData, getPostsData } from "../../../lib/blog";
+import { getPostData, getPostsData } from "../../../lib/notion";
 import { FadeIn } from "../../../components/FadeIn";
 import { notFound } from "next/navigation";
 import Logo from "@/components/Logo";
@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { MDXRemote } from "next-mdx-remote/rsc";
 
 export async function generateStaticParams() {
-  const posts = getPostsData();
+  const posts = await getPostsData();
   return posts.map((post) => ({
     slug: post.slug,
   }));

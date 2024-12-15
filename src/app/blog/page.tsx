@@ -1,11 +1,11 @@
 import { FadeIn } from "../../components/FadeIn";
-import { getPostsData } from "../../lib/blog";
+import { getPostsData } from "../../lib/notion";
 import BlogPostLink from "../../components/BlogPostLink";
 import Footer from "../../components/Footer";
 import Logo from "../../components/Logo";
 
-export default function BlogPage() {
-  const posts = getPostsData();
+export default async function BlogPage() {
+  const posts = await getPostsData();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
@@ -21,8 +21,8 @@ export default function BlogPage() {
 
       <main className="flex-grow">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post, index) => (
-            <FadeIn key={post.slug} delay={index * 100}>
+          {posts.map((post) => (
+            <FadeIn key={post.id}>
               <BlogPostLink
                 slug={post.slug}
                 title={post.title}
