@@ -6,7 +6,7 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-export async function POST() {
+export async function GET() {
   try {
     // Check for "Done" pages
     const response = await notion.databases.query({
