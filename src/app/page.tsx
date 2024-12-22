@@ -7,6 +7,7 @@ import LatestBlogCard from "@/components/LatestBlogCard";
 
 export default async function Home() {
   const posts = await getPostsData();
+  
   const latestPost = posts[0];
 
   return (

@@ -30,6 +30,7 @@ export async function GET(request: Request) {
     // Update status and trigger rebuild if needed
     if (response.results.length > 0) {
       revalidatePath("/blog");
+      revalidatePath("/");
 
       // Update statuses to Published
       for (const page of response.results) {
