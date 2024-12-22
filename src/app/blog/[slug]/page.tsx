@@ -26,18 +26,19 @@ export default async function BlogPost({
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
       <FadeIn>
-        <header className="flex items-center mb-8 space-x-4">
+        <header className="flex items-center space-x-4">
           <div className="relative inline-block">
             <Logo />
           </div>
         </header>
+        <div className="flex justify-between items-center"></div>
 
         <article className="mt-8 max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-white mb-4">
             {postData.title}
           </h1>
-          <p className="text-gray-400 mb-8">- posted {postData.date}</p>
-          <div className="prose prose-invert prose-lg max-w-none">
+          <p className="text-gray-400 mb-16">- posted {postData.date}</p>
+          <div className="prose prose-invert max-w-none">
             <MDXRemote source={postData.content} />
           </div>
         </article>
