@@ -31,9 +31,8 @@ export default async function BlogPost({
             <Logo />
           </div>
         </header>
-        <div className="flex justify-between items-center"></div>
 
-        <article className="mt-8 max-w-7xl mx-auto">
+        <article className="mt-8 max-w-[110em] mx-auto">
           <h1 className="text-4xl font-bold text-white mb-4">
             {postData.title}
           </h1>
