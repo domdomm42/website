@@ -33,6 +33,10 @@ export async function getPostsData() {
     ],
   });
 
+  if (response.results.length === 0) {
+    return [];
+  }
+
   return response.results
     .filter((page): page is PageObjectResponse => "properties" in page)
     .map((page) => ({
