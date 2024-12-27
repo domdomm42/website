@@ -19,18 +19,18 @@ export async function getPostsData() {
 
   const response = await notion.databases.query({
     database_id: databaseId,
+    filter: {
+      property: "Status",
+      select: {
+        equals: "Published",
+      },
+    },
     sorts: [
       {
         property: "Date",
         direction: "descending",
       },
     ],
-    filter: {
-      property: "Status",
-      select: {
-        equals: "Done",
-      },
-    },
   });
 
   return response.results
