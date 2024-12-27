@@ -25,6 +25,12 @@ export async function getPostsData() {
         direction: "descending",
       },
     ],
+    filter: {
+      property: "Status",
+      select: {
+        equals: "Done",
+      },
+    },
   });
 
   return response.results
