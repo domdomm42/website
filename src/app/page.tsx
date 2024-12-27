@@ -7,7 +7,7 @@ import LatestBlogCard from "@/components/LatestBlogCard";
 
 export default async function Home() {
   const posts = await getPostsData();
-  
+
   const latestPost = posts[0];
 
   return (
@@ -43,13 +43,7 @@ export default async function Home() {
               <ProjectCard
                 title="OpenOnion"
                 image="/ProductSample2.webp"
-                tags={[
-                  "Full-Stack",
-                  "React",
-                  "TailwindCSS",
-                  "NextJS",
-                  "MongoDB",
-                ]}
+                tags={["React", "TailwindCSS", "NextJS", "MongoDB", "Cypress"]}
                 description="Helping students navigate university life"
                 link="https://pls.openonion.ai"
               />
@@ -57,12 +51,10 @@ export default async function Home() {
                 title="EventStar"
                 image="/eventstar1.png"
                 tags={[
-                  "Full-Stack",
                   "Python",
                   "React",
                   "TailwindCSS",
                   "FastAPI",
-                  "Vite",
                   "PostgreSQL",
                 ]}
                 description="Simplifying event management and ticketing"
@@ -71,14 +63,7 @@ export default async function Home() {
               <ProjectCard
                 title="Geobuddies"
                 image="/geoBuddies.png"
-                tags={[
-                  "Full-Stack",
-                  "NodeJS",
-                  "React",
-                  "TailwindCSS",
-                  "Vite",
-                  "MongoDB",
-                ]}
+                tags={["NodeJS", "React", "TailwindCSS", "MongoDB", "AWS"]}
                 description="Free-to-play Geoguessr clone"
                 link="https://geobuddies.netlify.app"
               />

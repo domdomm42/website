@@ -22,20 +22,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   description,
   link,
 }) => {
-  const soundUrl = switchOn;
-  const [play] = useSound(soundUrl, { volume: 0.3 });
-
+  const [play] = useSound(switchOn, { volume: 0.3 });
   const [bubble] = useSound(bubbleSound, { volume: 0.7 });
+
   return (
     <Link
       href={link}
       target="_blank"
-      className="block group"
+      className="block group h-full"
       data-cursor-hover
       onMouseEnter={() => play()}
     >
-      <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl">
-        <div className="relative h-48">
+      <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl h-full flex flex-col">
+        <div className="relative h-48 overflow-hidden">
           <Image
             src={image}
             alt={title}
