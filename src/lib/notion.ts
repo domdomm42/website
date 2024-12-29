@@ -152,8 +152,8 @@ export async function getGrind75List() {
     database_id: databaseId,
     filter: {
       property: "Status",
-      status: {
-        equals: "Done",
+      select: {
+        equals: "Published",
       },
     },
     sorts: [
@@ -182,8 +182,8 @@ export async function getGrind75List() {
             (page.properties.Date as { date: { start: string } }).date.start
           ).toLocaleDateString("en-GB")
         : null,
-      status: (page.properties.Status as { status: { name: string } }).status
-        .name,
+      status: (page.properties.Status as { select: { name: string } }).select
+        ?.name,
       slug: (page.properties.Slug as { rich_text: { plain_text: string }[] })
         .rich_text[0]?.plain_text,
     }));

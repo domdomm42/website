@@ -4,7 +4,7 @@ import { FadeIn } from "@/components/FadeIn";
 import { getGrind75List } from "@/lib/notion";
 import Link from "next/link";
 import { getDifficultyColor } from "./utils";
-export default async function Page() {
+export default async function Grind75() {
   const problems = await getGrind75List();
   const totalSolved = problems.filter(
     (problem) => problem.status === "Done"
