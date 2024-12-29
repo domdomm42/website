@@ -26,7 +26,7 @@ export default async function BlogPage() {
               <BlogPostLink
                 slug={post.slug}
                 title={post.title}
-                date={post.date}
+                date={post.date ?? ""}
                 excerpt={post.excerpt}
               />
             </FadeIn>

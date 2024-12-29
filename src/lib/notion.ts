@@ -3,12 +3,18 @@ import { Client } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionToMarkdown } from "notion-to-md";
 
-const notion = new Client({
+const notionBlog = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-const n2m = new NotionToMarkdown({ notionClient: notion });
+const notionGrind75 = new Client({
+  auth: process.env.NOTION_GRIND75_SECRET,
+});
 
+const n2mBlog = new NotionToMarkdown({ notionClient: notionBlog });
+const n2mGrind75 = new NotionToMarkdown({ notionClient: notionGrind75 });
+
+/////////////////////////////////////////////////////////////////////// { BLOG POSTS } ///////////////////////////////////////////////////////////////////////
 // Gets all the posts from notion database
 export async function getPostsData() {
   const databaseId = process.env.NOTION_DATABASE_ID;
@@ -17,7 +23,7 @@ export async function getPostsData() {
     throw new Error("Missing NOTION_DATABASE_ID environment variable");
   }
 
-  const response = await notion.databases.query({
+  const response = await notionBlog.databases.query({
     database_id: databaseId,
     filter: {
       property: "Status",
@@ -45,7 +51,11 @@ export async function getPostsData() {
         .rich_text[0]?.plain_text,
       title: (page.properties.Title as { title: { plain_text: string }[] })
         .title[0]?.plain_text,
-      date: (page.properties.Date as { date: { start: string } }).date?.start,
+      date: (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
+        : null,
       excerpt: (
         page.properties.Excerpt as { rich_text: { plain_text: string }[] }
       ).rich_text[0]?.plain_text,
@@ -60,7 +70,7 @@ export async function getPostData(slug: string) {
     throw new Error("Missing NOTION_DATABASE_ID environment variable");
   }
 
-  const response = await notion.databases.query({
+  const response = await notionBlog.databases.query({
     database_id: databaseId,
     filter: {
       property: "Slug",
@@ -76,7 +86,7 @@ export async function getPostData(slug: string) {
 
   // Get the page and convert it to markdown
   const page = response.results[0];
-  const mdblocks = await n2m.pageToMarkdown(page.id);
+  const mdblocks = await n2mBlog.pageToMarkdown(page.id);
 
   for (const block of mdblocks) {
     if (block.type === "image") {
@@ -105,7 +115,7 @@ export async function getPostData(slug: string) {
     }
   }
 
-  const markdown = n2m.toMarkdownString(mdblocks);
+  const markdown = n2mBlog.toMarkdownString(mdblocks);
 
   return {
     id: page.id,
@@ -117,12 +127,144 @@ export async function getPostData(slug: string) {
         : null,
     date:
       "properties" in page
-        ? (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
         : null,
     excerpt:
       "properties" in page
         ? (page.properties.Excerpt as { rich_text: { plain_text: string }[] })
             .rich_text[0]?.plain_text
+        : null,
+    content: markdown.parent,
+  };
+}
+
+/////////////////////////////////////////////////////////////////////// { GRIND 75 } ///////////////////////////////////////////////////////////////////////
+export async function getGrind75List() {
+  const databaseId = process.env.GRIND75_DATABASE_ID;
+
+  if (!databaseId) {
+    throw new Error("Missing GRIND75_DATABASE_ID environment variable");
+  }
+
+  const response = await notionGrind75.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: "Status",
+      status: {
+        equals: "Done",
+      },
+    },
+    sorts: [
+      {
+        property: "Number",
+        direction: "ascending",
+      },
+    ],
+  });
+
+  if (response.results.length === 0) {
+    return [];
+  }
+
+  return response.results
+    .filter((page): page is PageObjectResponse => "properties" in page)
+    .map((page) => ({
+      id: page.id,
+      number: (page.properties.Number as { number: number }).number,
+      title: (page.properties.Title as { title: { plain_text: string }[] })
+        .title[0]?.plain_text,
+      difficulty: (page.properties.Difficulty as { select: { name: string } })
+        .select?.name,
+      date: (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
+        : null,
+      status: (page.properties.Status as { status: { name: string } }).status
+        .name,
+      slug: (page.properties.Slug as { rich_text: { plain_text: string }[] })
+        .rich_text[0]?.plain_text,
+    }));
+}
+
+export async function getGrind75Data(slug: string) {
+  const databaseId = process.env.GRIND75_DATABASE_ID;
+
+  if (!databaseId) {
+    throw new Error("Missing GRIND75_DATABASE_ID environment variable");
+  }
+
+  const response = await notionGrind75.databases.query({
+    database_id: databaseId,
+    filter: {
+      property: "Slug",
+      rich_text: {
+        equals: slug,
+      },
+    },
+  });
+
+  if (!response.results[0]) {
+    return null;
+  }
+
+  // Get the page and convert it to markdown
+  const page = response.results[0];
+  const mdblocks = await n2mGrind75.pageToMarkdown(page.id);
+
+  for (const block of mdblocks) {
+    if (block.type === "image") {
+      const notionImageUrl = block.parent;
+
+      const urlParts = notionImageUrl.split("?")[0].split("/");
+      const originalFileName = urlParts[urlParts.length - 1];
+
+      const fileName = `${slug}-${originalFileName
+        .replace(/[^a-zA-Z0-9.-]/g, "-")
+        .toLowerCase()}`;
+
+      const s3Url = `https://${process.env.AWS_BUCKET_NAME}.s3-${process.env.AWS_REGION}.amazonaws.com/blog-images/${fileName}`;
+
+      try {
+        const response = await fetch(s3Url);
+        if (!response.ok) {
+          await uploadImageToS3(notionImageUrl, fileName);
+        }
+        block.parent = `![${fileName}](${s3Url})`;
+      } catch (error) {
+        console.error("Error checking/uploading image:", error);
+        await uploadImageToS3(notionImageUrl, fileName);
+        block.parent = `![${fileName}](${s3Url})`;
+      }
+    }
+  }
+
+  const markdown = n2mGrind75.toMarkdownString(mdblocks);
+
+  return {
+    id: page.id,
+    number:
+      "properties" in page
+        ? (page.properties.Number as { number: number }).number
+        : null,
+    title:
+      "properties" in page
+        ? (page.properties.Title as { title: { plain_text: string }[] })
+            .title[0]?.plain_text
+        : null,
+    slug,
+    difficulty:
+      "properties" in page
+        ? (page.properties.Difficulty as { select: { name: string } }).select
+            ?.name
+        : null,
+    date:
+      "properties" in page
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
         : null,
     content: markdown.parent,
   };
