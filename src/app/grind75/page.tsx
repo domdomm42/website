@@ -6,9 +6,11 @@ import Link from "next/link";
 import { getDifficultyColor } from "./utils";
 export default async function Grind75() {
   const problems = await getGrind75List();
+
   const totalSolved = problems.filter(
-    (problem) => problem.status === "Done"
+    (problem) => problem.status === "Published"
   ).length;
+
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
       <FadeIn>
