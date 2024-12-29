@@ -1,19 +1,17 @@
 import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-
-// type Problem = {
-//   id: number;
-//   title: string;
-//   difficulty: "Easy" | "Medium" | "Hard";
-//   category: string;
-//   slug: string;
-//   completed?: boolean;
-// };
+import { getGrind75Data } from "@/lib/notion";
 
 export default async function Grind75() {
-  // You'll need to implement this function
-  // const problems = await getGrind75List();
+  const problems = await getGrind75Data();
+
+  const getDifficultyColor = (difficulty: string) => {
+    if (difficulty === "Easy") return "bg-green-900 text-green-300";
+    if (difficulty === "Medium") return "bg-yellow-900 text-yellow-300";
+    if (difficulty === "Hard") return "bg-red-900 text-red-300";
+    return "bg-gray-900 text-gray-300";
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
@@ -52,17 +50,6 @@ export default async function Grind75() {
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
-          <select className="bg-[#1E1F1E] text-white px-4 py-2 rounded-lg">
-            <option value="all">All Categories</option>
-            <option value="array">Array</option>
-            <option value="string">String</option>
-            {/* Add more categories */}
-          </select>
-          <select className="bg-[#1E1F1E] text-white px-4 py-2 rounded-lg">
-            <option value="all">All Status</option>
-            <option value="completed">Completed</option>
-            <option value="pending">Pending</option>
-          </select>
         </div>
 
         {/* Problems Table */}
@@ -73,34 +60,29 @@ export default async function Grind75() {
                 <th className="px-6 py-3 text-left">#</th>
                 <th className="px-6 py-3 text-left">Title</th>
                 <th className="px-6 py-3 text-left">Difficulty</th>
-                <th className="px-6 py-3 text-left">Category</th>
-                <th className="px-6 py-3 text-left">Status</th>
+                <th className="px-6 py-3 text-left">Date Published</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-700">
-              {/* NEED TO MAP THROUGH PROBLEMS */}
-              <tr className="hover:bg-[#1E1F1E] transition-colors">
-                <td className="px-6 py-4">1</td>
-                <td className="px-6 py-4">
-                  <a
-                    href="/grind75/two-sum"
-                    className="text-blue-400 hover:underline"
-                  >
-                    Two Sum
-                  </a>
-                </td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 rounded-full text-sm bg-green-900 text-green-300">
-                    Easy
-                  </span>
-                </td>
-                <td className="px-6 py-4">Array</td>
-                <td className="px-6 py-4">
-                  <span className="px-2 py-1 rounded-full text-sm bg-gray-700 text-gray-300">
-                    Pending
-                  </span>
-                </td>
-              </tr>
+              {problems.map((problem) => (
+                <tr
+                  key={problem.number}
+                  className="hover:bg-[#1E1F1E] transition-colors"
+                >
+                  <td className="px-6 py-4">{problem.number}</td>
+                  <td className="px-6 py-4">{problem.title}</td>
+                  <td className="px-6 py-4">
+                    <span
+                      className={`px-2 py-1 rounded-full text-sm ${getDifficultyColor(
+                        problem.difficulty
+                      )}`}
+                    >
+                      {problem.difficulty}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4">{problem.date}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

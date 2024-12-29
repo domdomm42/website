@@ -12,17 +12,6 @@ export default function Header() {
       <nav>
         <ul className="flex space-x-6 items-center">
           <Link
-            href="/grind75"
-            className="text-gray-400 hover:text-white transition-colors duration-200"
-            onMouseEnter={() => {
-              const audio = new Audio(switchOn);
-              audio.volume = 0.3;
-              audio.play();
-            }}
-          >
-            Grind75
-          </Link>
-          <Link
             href="/blog"
             className="text-gray-400 hover:text-white transition-colors duration-200"
             onMouseEnter={() => {
@@ -32,6 +21,18 @@ export default function Header() {
             }}
           >
             Blog
+          </Link>
+
+          <Link
+            href="/grind75"
+            className="text-gray-400 hover:text-white transition-colors duration-200"
+            onMouseEnter={() => {
+              const audio = new Audio(switchOn);
+              audio.volume = 0.3;
+              audio.play();
+            }}
+          >
+            Grind75
           </Link>
         </ul>
       </nav>
