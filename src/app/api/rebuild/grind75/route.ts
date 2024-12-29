@@ -3,7 +3,7 @@ import { Client } from "@notionhq/client";
 import { revalidatePath } from "next/cache";
 
 const notion = new Client({
-  auth: process.env.NOTION_API_KEY,
+  auth: process.env.NOTION_GRIND75_SECRET,
 });
 
 export async function GET(request: Request) {
@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     }
 
     const response = await notion.databases.query({
-      database_id: process.env.NOTION_GRIND75_DATABASE_ID!,
+      database_id: process.env.GRIND75_DATABASE_ID!,
       filter: {
         property: "Status",
         select: {
