@@ -1,17 +1,11 @@
 import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
-import { getGrind75Data } from "@/lib/notion";
+import { getGrind75List } from "@/lib/notion";
+import Link from "next/link";
 
 export default async function Grind75() {
-  const problems = await getGrind75Data();
-
-  const getDifficultyColor = (difficulty: string) => {
-    if (difficulty === "Easy") return "bg-green-900 text-green-300";
-    if (difficulty === "Medium") return "bg-yellow-900 text-yellow-300";
-    if (difficulty === "Hard") return "bg-red-900 text-red-300";
-    return "bg-gray-900 text-gray-300";
-  };
+  const problems = await getGrind75List();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
@@ -70,7 +64,14 @@ export default async function Grind75() {
                   className="hover:bg-[#1E1F1E] transition-colors"
                 >
                   <td className="px-6 py-4">{problem.number}</td>
-                  <td className="px-6 py-4">{problem.title}</td>
+                  <td className="px-6 py-4">
+                    <Link
+                      href={`/grind75/${problem.slug}`}
+                      className="text-blue-400 hover:text-blue-300"
+                    >
+                      {problem.title}
+                    </Link>
+                  </td>
                   <td className="px-6 py-4">
                     <span
                       className={`px-2 py-1 rounded-full text-sm ${getDifficultyColor(
@@ -91,3 +92,10 @@ export default async function Grind75() {
     </div>
   );
 }
+
+export const getDifficultyColor = (difficulty: string) => {
+  if (difficulty === "Easy") return "bg-green-900 text-green-300";
+  if (difficulty === "Medium") return "bg-yellow-900 text-yellow-300";
+  if (difficulty === "Hard") return "bg-red-900 text-red-300";
+  return "bg-gray-900 text-gray-300";
+};
