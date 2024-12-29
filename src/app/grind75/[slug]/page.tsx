@@ -4,7 +4,7 @@ import Logo from "@/components/Logo";
 import Footer from "@/components/Footer";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
-import { getDifficultyColor } from "@/app/grind75/page";
+import { getDifficultyColor } from "@/app/grind75/utils";
 
 export async function generateStaticParams() {
   const problems = await getGrind75List();

@@ -6,7 +6,7 @@ import bubbleSound from "../../public/bubble.mp3";
 
 interface LatestBlogCardProps {
   title: string;
-  date: string;
+  date: string | null;
   excerpt: string;
   slug: string;
 }

@@ -3,10 +3,12 @@ import Footer from "@/components/Footer";
 import { FadeIn } from "@/components/FadeIn";
 import { getGrind75List } from "@/lib/notion";
 import Link from "next/link";
-
-export default async function Grind75() {
+import { getDifficultyColor } from "./utils";
+export default async function Page() {
   const problems = await getGrind75List();
-
+  const totalSolved = problems.filter(
+    (problem) => problem.status === "Done"
+  ).length;
   return (
     <div className="flex flex-col min-h-screen bg-[#191a19] p-6 sm:p-8 md:p-10 lg:p-12 xl:px-24 xl:py-0 2xl:px-32 2xl:py-8 pt-0">
       <FadeIn>
@@ -20,7 +22,7 @@ export default async function Grind75() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           <div className="bg-[#1E1F1E] p-6 rounded-lg">
             <h3 className="text-white text-lg font-semibold mb-2">Progress</h3>
-            <div className="text-3xl text-green-400">0/75</div>
+            <div className="text-3xl text-green-400">{totalSolved}/75</div>
           </div>
           <div className="bg-[#1E1F1E] p-6 rounded-lg">
             <h3 className="text-white text-lg font-semibold mb-2">
@@ -32,7 +34,9 @@ export default async function Grind75() {
             <h3 className="text-white text-lg font-semibold mb-2">
               Completion
             </h3>
-            <div className="text-3xl text-purple-400">0%</div>
+            <div className="text-3xl text-purple-400">
+              {Math.round((totalSolved / 75) * 100)}%
+            </div>
           </div>
         </div>
 
@@ -92,10 +96,3 @@ export default async function Grind75() {
     </div>
   );
 }
-
-export const getDifficultyColor = (difficulty: string) => {
-  if (difficulty === "Easy") return "bg-green-900 text-green-300";
-  if (difficulty === "Medium") return "bg-yellow-900 text-yellow-300";
-  if (difficulty === "Hard") return "bg-red-900 text-red-300";
-  return "bg-gray-900 text-gray-300";
-};

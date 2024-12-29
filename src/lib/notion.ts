@@ -51,7 +51,11 @@ export async function getPostsData() {
         .rich_text[0]?.plain_text,
       title: (page.properties.Title as { title: { plain_text: string }[] })
         .title[0]?.plain_text,
-      date: (page.properties.Date as { date: { start: string } }).date?.start,
+      date: (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
+        : null,
       excerpt: (
         page.properties.Excerpt as { rich_text: { plain_text: string }[] }
       ).rich_text[0]?.plain_text,
@@ -123,7 +127,9 @@ export async function getPostData(slug: string) {
         : null,
     date:
       "properties" in page
-        ? (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
         : null,
     excerpt:
       "properties" in page
@@ -171,7 +177,11 @@ export async function getGrind75List() {
         .title[0]?.plain_text,
       difficulty: (page.properties.Difficulty as { select: { name: string } })
         .select?.name,
-      date: (page.properties.Date as { date: { start: string } }).date?.start,
+      date: (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
+        : null,
       status: (page.properties.Status as { status: { name: string } }).status
         .name,
       slug: (page.properties.Slug as { rich_text: { plain_text: string }[] })
@@ -252,7 +262,9 @@ export async function getGrind75Data(slug: string) {
         : null,
     date:
       "properties" in page
-        ? (page.properties.Date as { date: { start: string } }).date?.start
+        ? new Date(
+            (page.properties.Date as { date: { start: string } }).date.start
+          ).toLocaleDateString("en-GB")
         : null,
     content: markdown.parent,
   };
