@@ -24,8 +24,8 @@ export default async function Home() {
 
           <p className="text-gray-400 max-w-4xl mb-40 text-lg">
             I am a recent UNSW graduate and a lover of learning and technology.
-            I&apos;ve studied and worked across diverse fields ranging from AI
-            to Cybersecurity. Beyond tech, I&apos;m into perfecting my craft
+            I&apos;ve studied and worked across diverse fields ranging from Web
+            Development to AI. Beyond tech, I&apos;m into perfecting my craft
             through BJJ, Muay Thai, Boxing, and weightlifting. I find that
             keeping active helps me not only physically but also improves my
             mood and mental clarity.
@@ -41,24 +41,18 @@ export default async function Home() {
           <FadeIn delay={400} mobileDelay={200}>
             <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 xl:grid-cols-3">
               <ProjectCard
+                title="HiveStream"
+                image="/hivestream.jpg"
+                tags={["NodeJS", "NextJS", "React", "TailwindCSS", "AWS"]}
+                description="AI LinkedIn Automation"
+                link="https://www.hivestream.au"
+              />
+              <ProjectCard
                 title="OpenOnion"
                 image="/ProductSample2.webp"
                 tags={["React", "TailwindCSS", "NextJS", "MongoDB", "Cypress"]}
                 description="Helping students navigate university life"
                 link="https://pls.openonion.ai"
-              />
-              <ProjectCard
-                title="EventStar"
-                image="/eventstar1.png"
-                tags={[
-                  "Python",
-                  "React",
-                  "TailwindCSS",
-                  "FastAPI",
-                  "PostgreSQL",
-                ]}
-                description="Simplifying event management and ticketing"
-                link="https://eventstar.netlify.app"
               />
               <ProjectCard
                 title="Geobuddies"
@@ -77,28 +71,17 @@ export default async function Home() {
               🌊 what am I up to right now?
             </h3>
             <p className="text-gray-400 max-w-4xl mb-20 text-lg">
-              I am currently working as a Full Stack Developer at a startup
-              called OpenOnion.
+              I am currently working as a Full Stack Developer at HiveStream
+              under Internet 2.0.
               <br />
               <br />
-              Currently, in my spare time, I am getting my hands dirty with AI
-              and deep learning, currently working thorough <br />
-              <a
-                href="https://course.fast.ai"
-                target="_blank"
-                className="text-gray-400 hover:text-gray-300 underline"
-              >
-                &quot;Practical Deep Learning for Coders&quot;
-              </a>
-              . It&apos;s a great course to get you started in the field of deep
-              learning. The course is structured in a top-down approach, meaning
-              that you start off building models using industry-standard tools
-              and techniques, before moving onto the more complex inner workings
-              of said tools and techniques.
-              <br />
+              In my spare time, I love getting my hands dirty with AI and web
+              development. I am currently putting the finishing touches to my AI
+              Voice assistant tool on the web, it will be my own mini version of
+              Jarvis from Iron Man!
               <br />
               <span className="text-gray-400 text-sm">
-                Updated 10 September 2024
+                Updated 8 January 2025
               </span>
             </p>
           </section>
