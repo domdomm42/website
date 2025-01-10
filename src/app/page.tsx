@@ -55,11 +55,11 @@ export default async function Home() {
                 link="https://pls.openonion.ai"
               />
               <ProjectCard
-                title="Geobuddies"
-                image="/geoBuddies.png"
-                tags={["NodeJS", "React", "TailwindCSS", "MongoDB", "AWS"]}
-                description="Free-to-play Geoguessr clone"
-                link="https://geobuddies.netlify.app"
+                title="Vocal AI"
+                image="/vocalai.png"
+                tags={["React", "Python", "TailwindCSS", "OpenAI", "Deepgram"]}
+                description="Speech-To-Speech AI Assistant"
+                link="https://vocalai.netlify.app"
               />
             </div>
           </FadeIn>
