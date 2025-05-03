@@ -23,7 +23,7 @@ export default async function Home() {
           </h2>
 
           <p className="text-gray-400 max-w-4xl mb-40 text-lg">
-            I am a recent UNSW graduate and a lover of learning and technology.
+            I am a Full-stack developer and a lover of learning and technology.
             I&apos;ve studied and worked across diverse fields ranging from Web
             Development to AI. Beyond tech, I&apos;m into perfecting my craft
             through BJJ, Muay Thai, Boxing, and weightlifting. I find that
@@ -71,17 +71,13 @@ export default async function Home() {
               🌊 what am I up to right now?
             </h3>
             <p className="text-gray-400 max-w-4xl mb-20 text-lg">
-              I am currently working as a Full Stack Developer at HiveStream
-              under Internet 2.0.
+              I am currently working as a Full Stack Developer at Lawpath.
               <br />
               <br />
-              In my spare time, I love getting my hands dirty with AI and web
-              development. I am currently putting the finishing touches to my AI
-              Voice assistant tool on the web, it will be my own mini version of
-              Jarvis from Iron Man!
+              In my spare time, I love exploring and learning new things.
               <br />
               <span className="text-gray-400 text-sm">
-                Updated 8 January 2025
+                Updated 3 May 2025
               </span>
             </p>
           </section>
