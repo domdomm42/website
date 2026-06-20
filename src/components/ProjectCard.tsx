@@ -9,18 +9,18 @@ import useSound from "use-sound";
 interface ProjectCardProps {
   title: string;
   image: string;
-  tags: string[];
   description: string;
   link: string;
   accentColor?: string;
+  badge?: string;
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   image,
-  tags,
   description,
   link,
+  badge,
 }) => {
   const [play] = useSound(switchOn, { volume: 0.3 });
   const [bubble] = useSound(bubbleSound, { volume: 0.7 });
@@ -32,8 +32,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       className="block group h-full"
       data-cursor-hover
       onMouseEnter={() => play()}
+      onClick={() => bubble()}
     >
-      <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl h-full flex flex-col">
+      <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-2xl group-hover:-translate-y-1 h-full flex flex-col">
         <div className="relative h-48 overflow-hidden">
           <Image
             src={image}
@@ -45,19 +46,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-[#1e1e1e] opacity-70"></div>
         </div>
         <div className="p-6 relative">
-          <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-          <p className="text-gray-400 mb-4 line-clamp-2">{description}</p>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 bg-[#2a2a2a] text-gray-300 text-xs rounded-full hover:bg-white hover:text-black"
-                onMouseEnter={() => bubble()}
-              >
-                {tag}
+          <div className="flex items-center gap-2 mb-2">
+            <h3 className="text-xl font-semibold text-white">{title}</h3>
+            {badge && (
+              <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-gray-400 border border-gray-700">
+                {badge}
               </span>
-            ))}
+            )}
           </div>
+          <p className="text-gray-400 mb-4 line-clamp-2">{description}</p>
         </div>
       </div>
     </Link>
