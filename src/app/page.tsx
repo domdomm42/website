@@ -18,7 +18,7 @@ export default function Home() {
               <h1 className="display-headline text-[clamp(2.75rem,8vw,6.75rem)] mb-10 lg:mb-14">
                 Welcome to my
                 <br />
-                <span className="display-accent">folio.</span>
+                <span className="display-accent">portfolio.</span>
               </h1>
 
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-start">
