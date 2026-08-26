@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export type StampVariant = "baseline" | "steep" | "beside" | "banner" | "footer";
+/** Magazine-style treatments for archived projects (playground) */
+export type ArchiveStyle = "kicker" | "caption" | "folio" | "deck" | "rule";
 
 interface ProjectCardProps {
   title: string;
@@ -13,14 +14,14 @@ interface ProjectCardProps {
   tags?: string[];
   featured?: boolean;
   archived?: boolean;
-  stampVariant?: StampVariant;
+  archiveStyle?: ArchiveStyle;
   logo?: string;
   logoDark?: string;
   logoAlt?: string;
   /** mono = force black/white for theme; color = keep original */
   logoTone?: "mono" | "color";
   monogram?: string;
-  /** When true, card is not a link (for stamp comparison demos) */
+  /** When true, card is not a link (for comparison demos) */
   demo?: boolean;
 }
 
@@ -80,25 +81,6 @@ function ProjectLogo({
   return null;
 }
 
-function Stamp({
-  variant,
-  inline = false,
-}: {
-  variant: StampVariant;
-  inline?: boolean;
-}) {
-  return (
-    <span
-      className={`project-cutout__stamp project-cutout__stamp--${variant} ${
-        inline ? "project-cutout__stamp--inline" : ""
-      }`}
-      aria-hidden={!inline}
-    >
-      Company pivoted
-    </span>
-  );
-}
-
 export default function ProjectCard({
   title,
   description,
@@ -107,7 +89,7 @@ export default function ProjectCard({
   tags = [],
   featured = false,
   archived = false,
-  stampVariant = "baseline",
+  archiveStyle = "kicker",
   logo,
   logoDark,
   logoAlt,
@@ -115,43 +97,25 @@ export default function ProjectCard({
   monogram,
   demo = false,
 }: ProjectCardProps) {
-  const useBeside = archived && stampVariant === "beside";
-  const useFooter = archived && stampVariant === "footer";
-  const useOverlay = archived && !useBeside && !useFooter;
+  const style = archived ? archiveStyle : null;
 
   const article = (
     <article
       className={`project-card relative h-full border-t border-[color:var(--rule)] flex flex-col overflow-hidden ${
         featured ? "pt-8" : "pt-6"
-      } ${useOverlay ? "project-card--archived" : ""}`}
+      }`}
     >
-      {useOverlay && (
-        <div
-          className={`project-cutout project-cutout--${stampVariant}`}
-          aria-hidden
-        >
-          <Stamp variant={stampVariant} />
-        </div>
-      )}
-
-      <div
-        className={`relative z-[1] flex flex-col h-full ${
-          useOverlay ? "project-card__content" : ""
-        }`}
-      >
+      <div className="relative z-[1] flex flex-col h-full">
         <div className="flex items-start justify-between gap-4 mb-5">
-          <div className="flex items-center gap-3 min-w-0 flex-wrap">
-            <p
-              className={`font-display text-accent/50 leading-none group-hover:text-accent transition-colors ${
-                featured
-                  ? "text-5xl sm:text-6xl lg:text-7xl"
-                  : "text-4xl sm:text-5xl"
-              }`}
-            >
-              {number}
-            </p>
-            {useBeside && <Stamp variant="beside" inline />}
-          </div>
+          <p
+            className={`font-display text-accent/50 leading-none group-hover:text-accent transition-colors ${
+              featured
+                ? "text-5xl sm:text-6xl lg:text-7xl"
+                : "text-4xl sm:text-5xl"
+            }`}
+          >
+            {number}
+          </p>
           <ProjectLogo
             logo={logo}
             logoDark={logoDark}
@@ -164,8 +128,12 @@ export default function ProjectCard({
 
         {featured && <p className="section-label mb-3">Feature</p>}
 
+        {style === "kicker" && (
+          <p className="archive-kicker mb-2">Archived · Company pivoted</p>
+        )}
+
         <div
-          className={`flex flex-wrap items-center gap-x-3 gap-y-2 mb-2 ${
+          className={`flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2 ${
             featured ? "mb-3" : ""
           }`}
         >
@@ -176,8 +144,18 @@ export default function ProjectCard({
           >
             {title}
           </h3>
-          {useFooter && <Stamp variant="footer" inline />}
         </div>
+
+        {style === "deck" && (
+          <p className="archive-deck mb-3">Company pivoted.</p>
+        )}
+
+        {style === "rule" && (
+          <div className="archive-rule mb-4" role="note">
+            <span className="archive-rule__label">Company pivoted</span>
+          </div>
+        )}
+
         <p
           className={`text-text-muted leading-relaxed mb-4 ${
             featured ? "text-lg max-w-xl mb-5" : ""
@@ -185,10 +163,24 @@ export default function ProjectCard({
         >
           {description}
         </p>
-        {tags.length > 0 && (
-          <p className="text-sm font-medium text-foreground/80 tracking-wide mb-3">
-            {tags.join(" · ")}
+
+        {style === "caption" && (
+          <p className="archive-caption mb-4">
+            Company pivoted — project archived.
           </p>
+        )}
+
+        {tags.length > 0 && (
+          <p className="text-sm font-medium text-foreground/80 tracking-wide mb-1">
+            {tags.join(" · ")}
+            {style === "folio" && (
+              <span className="archive-folio"> · Company pivoted</span>
+            )}
+          </p>
+        )}
+
+        {style === "folio" && tags.length === 0 && (
+          <p className="archive-folio text-sm tracking-wide">Company pivoted</p>
         )}
       </div>
     </article>

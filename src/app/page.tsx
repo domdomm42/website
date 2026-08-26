@@ -77,7 +77,7 @@ export default function Home() {
                       title="OpenOnion"
                       description="Helping students navigate university life"
                       archived
-                      stampVariant="footer"
+                      archiveStyle="kicker"
                       tags={["Full-stack"]}
                       logo="/openonionlogo.svg"
                       logoDark="/openonionlogo-dark.svg"
