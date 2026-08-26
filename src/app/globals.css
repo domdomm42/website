@@ -109,7 +109,7 @@ h6 {
 .hairline {
   border: none;
   border-top: 1px solid var(--rule);
-  margin: 0;
+  /* Don't set margin here — Tailwind mb-* on <hr> must win */
 }
 
 .section-label {
