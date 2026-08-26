@@ -1,41 +1,22 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import Logo from "./Logo";
-import switchOn from "../../public/switch-on.mp3";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center">
-      <Logo />
-      <nav>
-        <ul className="flex space-x-6 items-center">
-          <Link
-            href="/blog"
-            className="text-gray-400 hover:text-white transition-colors duration-200"
-            onMouseEnter={() => {
-              const audio = new Audio(switchOn);
-              audio.volume = 0.3;
-              audio.play();
-            }}
-          >
-            Blog
-          </Link>
-
-          <Link
-            href="/grind75"
-            className="text-gray-400 hover:text-white transition-colors duration-200"
-            onMouseEnter={() => {
-              const audio = new Audio(switchOn);
-              audio.volume = 0.3;
-              audio.play();
-            }}
-          >
-            Grind75
-          </Link>
-        </ul>
-      </nav>
+    <header className="mb-12 lg:mb-16">
+      <div className="flex justify-between items-center gap-6 pb-4">
+        <Link
+          href="/"
+          className="section-label hover:opacity-70 transition-opacity"
+          data-cursor-hover
+        >
+          Oudom Lim
+        </Link>
+        <ThemeToggle />
+      </div>
+      <hr className="hairline" />
     </header>
   );
 }

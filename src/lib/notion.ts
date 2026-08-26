@@ -3,20 +3,26 @@ import { Client } from "@notionhq/client";
 import { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionToMarkdown } from "notion-to-md";
 
-const notionBlog = new Client({
-  auth: process.env.NOTION_API_KEY,
-});
+const notionBlog = process.env.NOTION_API_KEY
+  ? new Client({ auth: process.env.NOTION_API_KEY })
+  : null;
 
-const notionGrind75 = new Client({
-  auth: process.env.NOTION_GRIND75_SECRET,
-});
+const notionGrind75 = process.env.NOTION_GRIND75_SECRET
+  ? new Client({ auth: process.env.NOTION_GRIND75_SECRET })
+  : null;
 
-const n2mBlog = new NotionToMarkdown({ notionClient: notionBlog });
-const n2mGrind75 = new NotionToMarkdown({ notionClient: notionGrind75 });
+const n2mBlog = notionBlog
+  ? new NotionToMarkdown({ notionClient: notionBlog })
+  : null;
+const n2mGrind75 = notionGrind75
+  ? new NotionToMarkdown({ notionClient: notionGrind75 })
+  : null;
 
 /////////////////////////////////////////////////////////////////////// { BLOG POSTS } ///////////////////////////////////////////////////////////////////////
 // Gets all the posts from notion database
 export async function getPostsData() {
+  if (!notionBlog) return [];
+
   const databaseId = process.env.NOTION_DATABASE_ID;
 
   if (!databaseId) {
@@ -64,6 +70,8 @@ export async function getPostsData() {
 
 // Gets a single post from notion database given the slug
 export async function getPostData(slug: string) {
+  if (!notionBlog || !n2mBlog) return null;
+
   const databaseId = process.env.NOTION_DATABASE_ID;
 
   if (!databaseId) {
@@ -142,6 +150,8 @@ export async function getPostData(slug: string) {
 
 /////////////////////////////////////////////////////////////////////// { GRIND 75 } ///////////////////////////////////////////////////////////////////////
 export async function getGrind75List() {
+  if (!notionGrind75) return [];
+
   const databaseId = process.env.GRIND75_DATABASE_ID;
 
   if (!databaseId) {
@@ -190,6 +200,8 @@ export async function getGrind75List() {
 }
 
 export async function getGrind75Data(slug: string) {
+  if (!notionGrind75 || !n2mGrind75) return null;
+
   const databaseId = process.env.GRIND75_DATABASE_ID;
 
   if (!databaseId) {

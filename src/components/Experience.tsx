@@ -1,5 +1,3 @@
-import React from "react";
-
 interface ExperienceItem {
   company: string;
   role: string;
@@ -30,40 +28,50 @@ const experiences: ExperienceItem[] = [
 
 export default function Experience() {
   return (
-    <ol className="relative border-l border-gray-800 ml-2">
-      {experiences.map((exp) => (
-        <li key={exp.company} className="mb-10 ml-6 last:mb-0">
-          <span className="absolute -left-[7px] flex h-3.5 w-3.5 items-center justify-center">
-            {exp.current ? (
-              <span className="relative flex h-3 w-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex h-3 w-3 rounded-full bg-green-500"></span>
-              </span>
-            ) : (
-              <span className="h-3 w-3 rounded-full bg-gray-600"></span>
-            )}
-          </span>
-          <div className="flex flex-wrap items-baseline gap-x-3">
-            <h4 className="text-lg text-white">{exp.role}</h4>
-            <span className="text-gray-500">·</span>
-            <span className="text-gray-300">{exp.company}</span>
+    <ol className="space-y-10">
+      {experiences.map((exp, index) => (
+        <li
+          key={exp.company}
+          className="grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-8 border-t border-[color:var(--rule)] pt-6"
+        >
+          <div className="md:col-span-3">
+            <p className="section-label mb-1">
+              {String(index + 1).padStart(2, "0")}
+            </p>
+            <p className="text-text-muted text-sm">{exp.period}</p>
           </div>
-          <p className="text-sm text-gray-500 mt-1 mb-2">{exp.period}</p>
-          <p className="text-gray-400 max-w-2xl">{exp.description}</p>
-          {exp.note && (
-            <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-gray-700 bg-white/5 px-3 py-1 text-sm text-gray-400">
-              <svg
-                className="w-4 h-4 shrink-0 text-yellow-400/80"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-hidden="true"
-              >
-                <path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-              </svg>
-              {exp.note}
-            </span>
-          )}
+          <div className="md:col-span-9">
+            <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+              <h3 className="font-display text-xl sm:text-2xl text-foreground">
+                {exp.role}
+              </h3>
+              <span className="text-text-muted">at</span>
+              <span className="text-accent">{exp.company}</span>
+              {exp.current && (
+                <span className="text-xs tracking-wide uppercase text-text-muted">
+                  · Current
+                </span>
+              )}
+            </div>
+            <p className="text-text-muted leading-relaxed max-w-2xl">
+              {exp.description}
+            </p>
+            {exp.note && (
+              <div className="award-note">
+                <svg
+                  className="award-note__star"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden
+                >
+                  <path d="M12 2.5l2.6 6.6h6.9l-5.5 4.2 2.1 6.7L12 16.8l-5.1 3.2 2.1-6.7-5.5-4.2h6.9L12 2.5z" />
+                </svg>
+                <p className="award-note__text">{exp.note}</p>
+              </div>
+            )}
+          </div>
         </li>
       ))}
     </ol>

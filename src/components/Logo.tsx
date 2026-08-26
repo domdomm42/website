@@ -1,27 +1,28 @@
-import Link from "next/link";
+"use client";
+import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import finalLogoFont from "../../public/finalLogoFont.svg";
 import drill from "../../public/drill.svg";
 
 export default function Logo() {
   return (
-    <Link href="/" className="flex items-start relative">
+    <Link href="/" className="flex items-center gap-3 group" data-cursor-hover>
+      <Image
+        src={drill}
+        alt=""
+        width={28}
+        height={28}
+        className="opacity-70 group-hover:opacity-100 transition-opacity"
+        aria-hidden
+      />
       <Image
         src={finalLogoFont}
-        alt="logo"
-        width={150}
-        height={150}
-        className="hover:opacity-60"
+        alt="Oudom"
+        width={100}
+        height={40}
+        className="opacity-80 group-hover:opacity-100 transition-opacity"
       />
-      <div className="absolute" style={{ top: "35px", right: "15px" }}>
-        <Image
-          src={drill}
-          alt="drill"
-          width={40}
-          height={40}
-          className="animate-drill"
-        />
-      </div>
     </Link>
   );
 }

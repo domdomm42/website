@@ -1,0 +1,34 @@
+---
+description: Preferred Projects section layout + archived stamp baseline
+globs: src/components/ProjectCard.tsx,src/app/page.tsx,src/app/globals.css
+alwaysApply: false
+---
+
+# Projects layout baseline (saved preference)
+
+User liked this layout as of Aug 2026. Restore to it if experiments don't land.
+
+## Structure
+- Typographic case studies — **no product screenshots**
+- Each card: **large number top-left**, **logo/monogram top-right** (same for featured + secondary)
+- Then: title, one-line description, middot tags (prefer just `Full-stack`)
+- OpenOnion: archived with stamp — **chosen: E footer + B worn dashed ring**
+- Grid: featured Lawpath full-width first, then OpenOnion | Vocal AI in two columns with vertical hairline between
+
+## Logos
+- Lawpath: `/lawpath-logo.png` with `logoTone="mono"`
+- OpenOnion: `/openonionlogo.svg` + `/openonionlogo-dark.svg` via `logoDark`
+- Vocal AI: `monogram="VA"` until a real mark exists
+- Logo size preference: ~`h-12 sm:h-14`, max-width ~`11rem`
+
+## Chosen stamp: `stampVariant="footer"`
+- Straight (no rotation), sits under the Full-stack tag
+- Visual style from B: solid border + worn dashed outer ring (`::after`)
+- Text: **Company pivoted**
+- Does not overlay/fade the description
+
+## Do not regress to
+- Platform screenshots as project visuals
+- Lawpath logo nested under “Feature” in the text column
+- Mono filter on OpenOnion SVG
+- Solid opaque black stamp that blocks description

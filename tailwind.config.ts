@@ -9,6 +9,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ["var(--font-display)", "Georgia", "serif"],
+        body: ["var(--font-body)", "Georgia", "serif"],
+      },
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        surface: "var(--surface)",
+        "surface-hover": "var(--surface-hover)",
+        accent: "var(--accent)",
+        "text-muted": "var(--text-muted)",
+      },
       typography: {
         DEFAULT: {
           css: {
@@ -21,10 +33,6 @@ const config: Config = {
             code: { color: "#EB5757" },
           },
         },
-      },
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
       },
     },
   },
